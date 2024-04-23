@@ -18,7 +18,7 @@ export const Login = () => {
   const [rememberMe, setRememberMe] = useState<boolean>(false);
   const [messageApi, contextHolder] = message.useMessage();
 
-  const { signIn } = useAuthContext();
+  const { signIn, isLoading} = useAuthContext();
 
   useEffect(() => {
     const credentials = sessionManagement.getCredentials();
@@ -109,6 +109,7 @@ export const Login = () => {
           <Button
             onClick={form.submit}
             type="primary"
+            loading={isLoading}
             style={{
               marginTop: 18,
             }}
@@ -116,6 +117,24 @@ export const Login = () => {
             Acessar
           </Button>
         </Form>
+
+        <Col span={24} style={{
+          width:"100%",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center",
+          marginTop: 12,
+
+        }}>
+          <Link
+            style={{
+              textAlign: "center",
+            }}
+            to={"/register"}
+          >
+            Não tem cadastro? Registre-se já!
+          </Link>
+        </Col>
       </Col>
     </Row>
   );

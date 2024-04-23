@@ -1,5 +1,5 @@
 export interface UserModel {
-  id: number;
+  id: string;
   name: string;
   email: string;
   createdAt: Date;
@@ -11,6 +11,12 @@ export interface AuthenticatedUserModel extends UserModel {
 }
 
 export interface UserCredentialsModel {
+  email: string;
+  password: string;
+}
+
+export interface UserRegisterModel {
+  name: string;
   email: string;
   password: string;
 }

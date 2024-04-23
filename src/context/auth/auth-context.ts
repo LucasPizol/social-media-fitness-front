@@ -1,14 +1,20 @@
 import { createContext, useContext } from "react";
-import { UserCredentialsModel, UserModel } from "../../intefaces/user";
+import {
+  UserCredentialsModel,
+  UserModel,
+  UserRegisterModel,
+} from "../../intefaces/user";
 
 export const AuthContext = createContext(null as any);
 
 export interface AuthContextProps {
   signOut: () => void;
   signIn: (credentials: UserCredentialsModel) => Promise<UserModel>;
+  register: (data: UserRegisterModel) => Promise<UserModel>;
 
   isLoading: boolean;
   user: UserModel | null;
+  isPageLoading: boolean;
 }
 
 export const useAuthContext = () => {
