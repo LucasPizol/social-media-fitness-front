@@ -1,27 +1,33 @@
-import { Form, Input } from "antd";
+import { Form, FormInstance, Input } from "antd";
 
-export const ConfirmPasswordField = () => {
+interface ConfirmPasswordFieldProps {
+  form: FormInstance;
+}
+export const ConfirmPasswordField = ({ form }: ConfirmPasswordFieldProps) => {
   return (
     <Form.Item
-    name="confirmPassword"
-    label="Confirme sua senha"
-    rules={[
-      { required: true, message: "Insira sua senha!" },
-      {
-        min: 6,
-        message: "Sua senha deve ter pelo menos 6 digitos!",
-      },
-      {
-        validator(_, value, callback) {
-          if (value !== form.getFieldValue("password")) {
-            callback("As senhas devem ser iguais!");
-          }
-          callback();
+      name="confirmPassword"
+      label="Confirme sua senha"
+      rules={[
+        { required: true, message: "Insira sua senha!" },
+        {
+          min: 6,
+          message: "Sua senha deve ter pelo menos 6 digitos!",
         },
-      },
-    ]}
-  >
-    <Input.Password />
-  </Form.Item>
+        {
+          validator(_, value) {
+            return new Promise((res, rej) => {
+              if (value !== form.getFieldValue("password")) {
+                return rej("As senhas devem ser iguais!");
+              }
+
+              return res(value);
+            });
+          },
+        },
+      ]}
+    >
+      <Input.Password />
+    </Form.Item>
   );
 };
