@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { PageLayout } from "./components/PageLayout";
 import { useAuthContext } from "./context/auth/auth-context";
+import { HomePage } from "./pages/home";
 import { Login } from "./pages/login";
 import { Profile } from "./pages/profile";
 import { Register } from "./pages/register";
@@ -30,8 +31,9 @@ export const RoutesApp = () => {
       return (
         <PageLayout>
           <Routes>
-            <Route path="/profile" element={<Profile />}></Route>
-            <Route path="*" element={<Navigate to={"/profile"} />}></Route>
+            <Route path="/inicio" element={<HomePage />}></Route>
+            <Route path="/perfil" element={<Profile />}></Route>
+            <Route path="*" element={<Navigate to={"/inicio"} />}></Route>
           </Routes>
         </PageLayout>
       );
@@ -39,7 +41,7 @@ export const RoutesApp = () => {
     return (
       <Routes>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/register" element={<Register />}></Route>
+        <Route path="/registro" element={<Register />}></Route>
         <Route path="*" element={<Navigate to={"/login"} />}></Route>
       </Routes>
     );

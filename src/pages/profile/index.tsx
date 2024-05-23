@@ -8,7 +8,7 @@ export const Profile = () => {
   const { profileUUID } = useParams();
   const { user } = useAuthContext();
 
-  const { data, error, isLoading } = useLoadApi<UserModel>(() =>
+  const { data } = useLoadApi<UserModel>(() =>
     getUserById(profileUUID ?? user?.id ?? "")
   );
 

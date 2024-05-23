@@ -4,6 +4,7 @@ export interface UserModel {
   email: string;
   createdAt: Date;
   updatedAt: Date;
+  avatar: string | null;
 }
 
 export interface AuthenticatedUserModel extends UserModel {

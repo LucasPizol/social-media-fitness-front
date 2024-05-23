@@ -1,17 +1,26 @@
-import { HomeOutlined } from "@ant-design/icons";
+import { HomeOutlined, UserOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import { MenuItemType } from "antd/es/menu/hooks/useItems";
 import { useMemo } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Sider } = Layout;
 
 export const PageLayout = ({ children }: { children: JSX.Element }) => {
+  const location = useLocation().pathname;
+  const navigate = useNavigate();
+
   const items = useMemo((): MenuItemType[] => {
     return [
       {
-        key: "home",
+        key: "/inicio",
         icon: <HomeOutlined />,
         label: "Início",
+      },
+      {
+        key: "/perfil",
+        icon: <UserOutlined />,
+        label: "Perfil",
       },
     ];
   }, []);
@@ -28,8 +37,11 @@ export const PageLayout = ({ children }: { children: JSX.Element }) => {
         <Menu
           theme="light"
           mode="inline"
-          defaultSelectedKeys={["4"]}
-          items={items}
+          selectedKeys={[location]}
+          items={items.map((item) => ({
+            ...item,
+            onClick: () => navigate(item.key.toString()),
+          }))}
         />
       </Sider>
       <Layout>
