@@ -1,5 +1,5 @@
-import { api } from "../../api/api";
-import { UserModel } from "../../intefaces/user";
+import { api } from "@/api/api";
+import { UserModel } from "@/intefaces/user";
 
 export const getAuthenticatedUser = async (): Promise<UserModel> => {
   return api

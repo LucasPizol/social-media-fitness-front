@@ -1,8 +1,5 @@
-import { api } from "../../api/api";
-import {
-  AuthenticatedUserModel,
-  UserCredentialsModel,
-} from "../../intefaces/user";
+import { api } from "@/api/api";
+import { AuthenticatedUserModel, UserCredentialsModel } from "@/intefaces/user";
 
 export const authenticateUser = async (
   data: UserCredentialsModel

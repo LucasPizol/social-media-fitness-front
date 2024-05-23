@@ -1,5 +1,5 @@
-import { api } from "../../api/api";
-import { AuthenticatedUserModel, UserModel } from "../../intefaces/user";
+import { api } from "@/api/api";
+import { AuthenticatedUserModel, UserModel } from "@/intefaces/user";
 
 export const registerUser = async (
   data: Pick<UserModel, "email" | "name"> & { password: string }
