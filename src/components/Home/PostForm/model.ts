@@ -9,18 +9,15 @@ interface PostFormProps {
   refetch: () => Promise<void>;
 }
 
-const getBase64 = (file: any): Promise<string> =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = (error) => reject(error);
-  });
+export interface UploadProp extends UploadFile {
+  key: string;
+  arrayBuffer: () => Promise<ArrayBuffer>;
+}
 
 export const usePostFormModel = ({ form, refetch }: PostFormProps) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [loading, setLoading] = useState<boolean>(false);
-  const [files, setFiles] = useState<UploadFile[]>([]);
+  const [files, setFiles] = useState<UploadProp[]>([]);
   const [previewFiles, setPreviewFiles] = useState<string[]>([]);
 
   const handleChangeFile = async (data: UploadChangeParam<UploadFile<any>>) => {
@@ -33,16 +30,28 @@ export const usePostFormModel = ({ form, refetch }: PostFormProps) => {
     } else {
       const filter = [...files, file];
 
-      setFiles(filter);
+      setFiles(filter as UploadProp[]);
     }
   };
 
   const handleSubmit = async (values: AddPostModel) => {
     try {
       setLoading(true);
-      await addPost(values);
-      await refetch();
+
+      const promises = files.map((file) => file.arrayBuffer());
+
+      const resolvedPromises = await Promise.all(promises);
+
+      const data = resolvedPromises.map(
+        (file) => new File([new Blob([file])], "data.png")
+      );
+
+      await addPost(values, data);
+      refetch();
       messageApi.success("Post adicionado com sucesso");
+      setPreviewFiles([]);
+      setFiles([]);
+      form.resetFields();
     } catch (error) {
       messageApi.error("Ocorreu um erro ao adicionar seu post");
     } finally {

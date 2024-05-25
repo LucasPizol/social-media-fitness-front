@@ -1,7 +1,7 @@
 import { api } from "@/api/api";
-import { PostModelWithLikes } from "@/intefaces/post";
+import { PostModelWithAggregation } from "@/intefaces/post";
 
-export const loadPost = async (): Promise<PostModelWithLikes[]> => {
+export const loadPost = async (): Promise<PostModelWithAggregation[]> => {
   return api
     .get("/post")
     .then((res) => res.data)

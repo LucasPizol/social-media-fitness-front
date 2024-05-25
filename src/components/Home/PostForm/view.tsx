@@ -12,8 +12,6 @@ export const PostFormView = ({
   setPreviewFiles,
   handleChangeFile,
 }: ReturnType<typeof usePostFormModel>) => {
-  console.log(previewFiles);
-
   return (
     <Form
       form={form}
@@ -30,14 +28,21 @@ export const PostFormView = ({
     >
       {contextHolder}
       <PostTextArea />{" "}
-      <Row justify="end" style={{ width: "100%", margin: 8 }}>
+      <Row
+        justify="end"
+        style={{
+          width: "100%",
+          margin: 8,
+          gap: 8,
+        }}
+      >
         {previewFiles.map((value, index) => (
           <Image
             key={index}
             src={value}
             width={60}
             height={60}
-            style={{ objectFit: "contain" }}
+            style={{ objectFit: "contain", border: "1px solid #e4e4e4" }}
           />
         ))}
       </Row>
@@ -56,12 +61,11 @@ export const PostFormView = ({
             const reader = new FileReader();
 
             reader.onload = (e) => {
-              if (e.target?.result) {
+              if (e.target?.result)
                 setPreviewFiles((files) => [
                   ...files,
                   String(e.target?.result),
                 ]);
-              }
             };
             reader.readAsDataURL(file);
 

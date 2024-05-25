@@ -8,16 +8,15 @@ export interface PostModel {
   updatedAt: Date;
   disabledAt: Date | null;
   isDisabled: boolean;
-  mediaUrl: string | null;
 }
 
 export interface AddPostModel {
   content: string;
-  mediaUrl: string | null;
   userId: number;
 }
 
-export interface PostModelWithLikes extends PostModel {
+export interface PostModelWithAggregation extends PostModel {
   likes: { likedBy: Pick<UserModel, "avatar" | "id" | "name"> }[];
   user: Pick<UserModel, "avatar" | "id" | "name">;
+  postMedia: { url: string }[];
 }
