@@ -4,11 +4,11 @@ import {
   UserCredentialsModel,
   UserModel,
   UserRegisterModel,
-} from "../../intefaces/user";
+} from "../../interfaces/user";
 import { authenticateUser } from "../../requests/user/authenticate-user";
-import { AuthContext } from "./auth-context";
 import { getAuthenticatedUser } from "../../requests/user/get-authenticated-user";
 import { registerUser } from "../../requests/user/register-user";
+import { AuthContext } from "./auth-context";
 
 export const AuthProvider = ({ children }: any) => {
   const [user, setUser] = useState<UserModel | null>(null);

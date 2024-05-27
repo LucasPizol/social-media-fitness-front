@@ -1,4 +1,4 @@
-import { UserCredentialsModel } from "../intefaces/user";
+import { UserCredentialsModel } from "../interfaces/user";
 
 class SessionManagement {
   private readonly ACCESS_TOKEN: string;

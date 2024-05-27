@@ -1,5 +1,8 @@
 import { api } from "@/api/api";
-import { AuthenticatedUserModel, UserCredentialsModel } from "@/intefaces/user";
+import {
+  AuthenticatedUserModel,
+  UserCredentialsModel,
+} from "@/interfaces/user";
 
 export const authenticateUser = async (
   data: UserCredentialsModel

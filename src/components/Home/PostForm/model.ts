@@ -1,4 +1,4 @@
-import { AddPostModel } from "@/intefaces/post";
+import { AddPostModel, PostModelWithAggregation } from "@/interfaces/post";
 import { addPost } from "@/requests/post/add-post";
 import { FormInstance, UploadFile, message } from "antd";
 import { UploadChangeParam } from "antd/es/upload";
@@ -6,7 +6,7 @@ import { useState } from "react";
 
 interface PostFormProps {
   form: FormInstance;
-  refetch: () => Promise<void>;
+  refetch: () => Promise<PostModelWithAggregation[]>;
 }
 
 export interface UploadProp extends UploadFile {

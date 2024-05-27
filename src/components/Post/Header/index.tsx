@@ -1,4 +1,4 @@
-import { PostModelWithAggregation } from "@/intefaces/post";
+import { PostModelWithAggregation } from "@/interfaces/post";
 import { getMinimalDate } from "@/utils/get-minimal-date";
 import { Col, Row, Typography } from "antd";
 import { Avatar } from "../Avatar";

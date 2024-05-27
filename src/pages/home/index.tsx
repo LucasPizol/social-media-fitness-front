@@ -1,15 +1,35 @@
 import { PostForm } from "@/components/Home/PostForm";
 import { PostComponent } from "@/components/Post";
 import { useLoadApi } from "@/hooks/useLoadApi";
-import { PostModelWithAggregation } from "@/intefaces/post";
+import { useScrollPosition } from "@/hooks/useScrollPosition";
+import { PostModelWithAggregation } from "@/interfaces/post";
 import { loadPost } from "@/requests/post/load-post";
 import { Col, Form, Spin } from "antd";
+import { useEffect, useState } from "react";
 
 export const HomePage = () => {
   const [form] = Form.useForm();
-  const { data, refetch, isLoading } = useLoadApi<PostModelWithAggregation[]>(
-    () => loadPost()
-  );
+  const [postCount, setPostCount] = useState<number>(0);
+  const [allData, setAllData] = useState<PostModelWithAggregation[]>([]);
+
+  const scrollPosition = useScrollPosition();
+
+  const { data, refetch, isLoading } =
+    useLoadApi<PostModelWithAggregation[]>(loadPost);
+
+  useEffect(() => {
+    if (scrollPosition >= document.body.offsetHeight) {
+      refetch(postCount + 10).then((data) => {
+        if (data.length === 0) return;
+        setPostCount((prev) => prev + 10);
+      });
+      setPostCount((prev) => prev + 10);
+    }
+  }, [scrollPosition]);
+
+  useEffect(() => {
+    if (data) setAllData((prev) => [...prev, ...data]);
+  }, [data]);
 
   return (
     <Col
@@ -23,17 +43,12 @@ export const HomePage = () => {
         minHeight: "100vh",
       }}
     >
-      {isLoading ? (
-        <Spin />
-      ) : (
-        <>
-          <PostForm refetch={refetch} form={form} />
+      <PostForm refetch={refetch} form={form} />
 
-          {data?.map((post) => (
-            <PostComponent post={post} />
-          ))}
-        </>
-      )}
+      {allData?.map((post) => (
+        <PostComponent post={post} />
+      ))}
+      {isLoading && <Spin />}
     </Col>
   );
 };

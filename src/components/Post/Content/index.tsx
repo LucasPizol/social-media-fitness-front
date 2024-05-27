@@ -1,5 +1,6 @@
-import { PostModelWithAggregation } from "@/intefaces/post";
-import { Image, Row, Typography } from "antd";
+import { PostModelWithAggregation } from "@/interfaces/post";
+import { Row, Typography } from "antd";
+import { PostContentImage } from "./Image";
 
 export interface PostHeaderProps {
   post: PostModelWithAggregation;
@@ -25,15 +26,7 @@ export const PostContent = ({ post }: PostHeaderProps) => {
         }}
       >
         {post.postMedia.map(({ url }) => (
-          <Image
-            src={url}
-            style={{
-              aspectRatio: "1/1",
-              objectFit: "contain",
-              flex: 1,
-              background: "#36373a",
-            }}
-          />
+          <PostContentImage key={url} url={url} />
         ))}
       </Row>
     </Row>

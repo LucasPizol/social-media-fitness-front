@@ -1,4 +1,4 @@
-import { PostModelWithAggregation } from "@/intefaces/post";
+import { PostModelWithAggregation } from "@/interfaces/post";
 import { Row } from "antd";
 import { PostContent } from "./Content";
 import { PostFooter } from "./Footer";

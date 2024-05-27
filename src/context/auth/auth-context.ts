@@ -3,7 +3,7 @@ import {
   UserCredentialsModel,
   UserModel,
   UserRegisterModel,
-} from "../../intefaces/user";
+} from "../../interfaces/user";
 
 export const AuthContext = createContext(null as any);
 

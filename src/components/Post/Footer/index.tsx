@@ -1,5 +1,5 @@
 import { useAuthContext } from "@/context/auth/auth-context";
-import { PostModelWithAggregation } from "@/intefaces/post";
+import { PostModelWithAggregation } from "@/interfaces/post";
 import { likePost } from "@/requests/like/like-post";
 import { unlikePost } from "@/requests/like/unlike-post";
 import { Row } from "antd";
@@ -31,7 +31,7 @@ export const PostFooter = ({ post }: PostFooterProps) => {
       if (heart) await unlikePost(post.id);
       else await likePost(post.id);
 
-      setHeart(!heart);
+      setHeart((prev) => !prev);
     } catch (error) {}
     setLoading(false);
   };

@@ -1,5 +1,5 @@
 import { api } from "@/api/api";
-import { AddPostModel, PostModel } from "@/intefaces/post";
+import { AddPostModel, PostModel } from "@/interfaces/post";
 
 export const addPost = async (
   values: AddPostModel,

@@ -1,6 +1,6 @@
 import { useAuthContext } from "@/context/auth/auth-context";
 import { useLoadApi } from "@/hooks/useLoadApi";
-import { UserModel } from "@/intefaces/user";
+import { UserModel } from "@/interfaces/user";
 import { getUserById } from "@/requests/user/get-user-by-id";
 import { useParams } from "react-router-dom";
 
